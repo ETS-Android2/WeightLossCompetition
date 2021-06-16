@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">WeightLossContest</string>
+    <string name="password">password</string>
+    <string name="log_in">Log in</string>
+    <string name="email_address">email address</string>
+    <string name="create_a_new_account">Create a New Account</string>
+    <string name="first_name">first name</string>
+    <string name="last_name">last name</string>
+    <string name="sign_up">sign up</string>
+    <string name="already_have_an_account_login">Already have an account? Login</string>
 </resources>
