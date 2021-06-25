@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 public class Home extends AppCompatActivity {
 
+    // TODO hamburger menu?
+    // TODO back button should return to HOME
     // TODO "For logout, you just have to call finish() and an intent to call login"
 
     @Override
