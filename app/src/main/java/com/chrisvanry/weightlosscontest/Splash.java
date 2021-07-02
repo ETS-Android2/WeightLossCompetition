@@ -8,6 +8,8 @@ import android.os.Handler;
 
 public class Splash extends AppCompatActivity {
 
+    // TODO stretched splash image
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
