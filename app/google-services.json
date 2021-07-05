@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "865863356961",
+    "project_id": "weight-loss-contest-86bec",
+    "storage_bucket": "weight-loss-contest-86bec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865863356961:android:bd41543fc1102b60f98960",
+        "android_client_info": {
+          "package_name": "com.chrisvanry.weightlosscontest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865863356961-qns073gs3bku3ukp8pqoquglds99v4rm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeTVgsxIzeYpRIvn3qInp32_MbotzeIxE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865863356961-qns073gs3bku3ukp8pqoquglds99v4rm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

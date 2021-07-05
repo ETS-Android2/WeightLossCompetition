@@ -1,10 +1,12 @@
-package com.chrisvanry.weightlosscontest;
+package com.chrisvanry.weightlosscontest.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+
+import com.chrisvanry.weightlosscontest.R;
+import com.chrisvanry.weightlosscontest.ui.Login;
 
 public class Splash extends AppCompatActivity {
 

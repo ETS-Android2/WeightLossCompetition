@@ -11,9 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeightLossContest">
-        <activity android:name=".HomeNotEnrolled"></activity>
+        <activity android:name=".ui.CompDetails"></activity>
         <activity
-            android:name=".Splash"
+            android:name=".ui.Splash"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,14 +22,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login"
-            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+            android:name=".ui.Login"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".SignUp"
-            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+            android:name=".ui.SignUp"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".HomeEnrolled"
-            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+            android:name=".ui.Home"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
     </application>
 
 </manifest>

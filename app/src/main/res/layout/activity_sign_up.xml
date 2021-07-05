@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUp">
+    tools:context=".ui.SignUp">
 
     <TextView
         android:id="@+id/textView2"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/firstname"
+        android:id="@+id/firstName"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:drawableRight="@drawable/ic_baseline_person_24"
@@ -36,7 +36,7 @@
         app:layout_constraintVertical_bias="0.094" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/lastname"
+        android:id="@+id/lastName"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:drawableRight="@drawable/ic_baseline_person_24"
@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstname"
+        app:layout_constraintTop_toBottomOf="@+id/firstName"
         app:layout_constraintVertical_bias="0.075" />
 
     <com.google.android.material.textfield.TextInputEditText
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastname"
+        app:layout_constraintTop_toBottomOf="@+id/lastName"
         app:layout_constraintVertical_bias="0.089" />
 
     <com.google.android.material.textfield.TextInputEditText
