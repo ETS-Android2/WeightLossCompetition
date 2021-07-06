@@ -62,6 +62,8 @@ public class SignUp extends AppCompatActivity {
         String lastName = textInputEditTextLastName.getText().toString().trim();
         String email = textInputEditTextEmail.getText().toString().trim();
         String password = textInputEditTextPassword.getText().toString().trim();
+        // Default is 0 until user joins competition
+        String competitionId = "0";
 
         // input validation - field not empty
         if(firstName.isEmpty()) {
@@ -115,7 +117,7 @@ public class SignUp extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(task.isSuccessful()) {
-                            User user = new User(firstName, lastName, email);
+                            User user = new User(firstName, lastName, email, competitionId);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
