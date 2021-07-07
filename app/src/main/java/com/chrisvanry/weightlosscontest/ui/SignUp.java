@@ -117,11 +117,15 @@ public class SignUp extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(task.isSuccessful()) {
+
+                            // Create user object with user input
                             User user = new User(firstName, lastName, email, competitionId);
 
-                            FirebaseDatabase.getInstance().getReference("Users")
+                            // Write object values to Firebase
+                            FirebaseDatabase.getInstance().getReference().child("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
 
@@ -139,6 +143,7 @@ public class SignUp extends AppCompatActivity {
                                     progressBar.setVisibility(View.GONE);
                                 }
                             });
+
                         } else {
                             Toast.makeText(SignUp.this, "User creation failed - try again", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);

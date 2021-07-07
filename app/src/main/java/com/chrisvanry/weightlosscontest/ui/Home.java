@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class Home extends AppCompatActivity {
 
     // TODO hamburger menu
@@ -32,21 +34,14 @@ public class Home extends AppCompatActivity {
     private TextView textViewCurrentComp;
 
     // Firebase
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private FirebaseUser firebaseUser = mAuth.getCurrentUser();
-    private String firebaseUserId = firebaseUser.getUid();
-
-    // User object
-    private User user = new User();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final FirebaseUser firebaseUser = mAuth.getCurrentUser();
+    private final String firebaseUserId = firebaseUser.getUid();
 
     // Competition object
     private Competition comp = new Competition();
 
-    // debug
-    public String userCompetitionId = "unchanged";
-    public String userEmail = "unchanged";
-    public String userFirstName = "unchanged";
-    public String userLastName = "unchanged";
+    final ArrayList<String> list = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +63,48 @@ public class Home extends AppCompatActivity {
             Toast.makeText(Home.this, "Logout successful", Toast.LENGTH_LONG).show();
         });
 
-        getUserData();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Retrieve user data from Firebase
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(firebaseUserId);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    User userData = snapshot.getValue(User.class);
+                    String firstName = userData.getFirstName();
+                    String lastName = userData.getLastName();
+                    String email = userData.getEmail();
+                    String competitionId = userData.getCompetitionId();
+                    list.add(firstName);
+                    list.add(lastName);
+                    list.add(email);
+                    list.add(competitionId);
+                    // debug
+                    list.add("success");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //debug
+                list.add("error");
+                throw error.toException();
+            }
+        });
+
+        // debug
+        list.add("outside scope");
 
         // debug log
-        Log.d("DEBUG", firebaseUserId);
-        Log.d("DEBUG", userCompetitionId+userEmail+userFirstName+userLastName);
+        Log.d("DEBUGOBJECT", firebaseUserId);
+        Log.d("DEBUGOBJECT", list.toString());
 
         // compId = Integer.parseInt(user.getCompetitionId());
 
@@ -88,61 +120,6 @@ public class Home extends AppCompatActivity {
             // textViewCurrentComp.setText(compName);
             // buttonCreateJoinComp.setVisibility(View.GONE);
         // }
-
-    }
-
-    // get User data from Firebase
-    private void getUserData() {
-//
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    user = snapshot.getValue(User.class);
-//                }
-//                Toast.makeText(Home.this, "Database success", Toast.LENGTH_LONG).show();
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(Home.this, "Database error", Toast.LENGTH_LONG).show();
-//            }
-//        });
-//
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUserId);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                userCompetitionId = dataSnapshot.child("competitionId").getValue().toString();
-                userEmail = dataSnapshot.child("email").getValue().toString();
-                userFirstName = dataSnapshot.child("firstName").getValue().toString();
-                userLastName = dataSnapshot.child("lastName").getValue().toString();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                throw error.toException();
-            }
-        });
-    }
-
-    // get Comp data from Firebase
-    private void getCompData() {
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Competitions");
-        reference.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    comp = snapshot.getValue(Competition.class);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
     }
 
