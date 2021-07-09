@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeightLossContest">
-        <activity android:name=".ui.CompDetails"></activity>
+        <activity android:name=".ui.CreateComp"></activity>
+        <activity android:name=".ui.CompDetails" />
         <activity
             android:name=".ui.Splash"
             android:theme="@style/SplashTheme">

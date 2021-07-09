@@ -11,4 +11,6 @@
     <string name="home">Home</string>
     <string name="settings">Settings</string>
     <string name="logout">Logout</string>
+    <string name="join_competition">Join Competition</string>
+    <string name="create_competition">Create Competition</string>
 </resources>
