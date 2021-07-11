@@ -41,4 +41,13 @@ public class Competition {
     public void setLength(String length) {
         this.length = length;
     }
+
+    @Override
+    public String toString() {
+        return "Competition{" +
+                "name='" + name + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", length='" + length + '\'' +
+                '}';
+    }
 }

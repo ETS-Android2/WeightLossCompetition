@@ -32,6 +32,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        // input fields
         textInputEditTextFirstName = findViewById(R.id.firstName);
         textInputEditTextLastName = findViewById(R.id.lastName);
         textInputEditTextEmail = findViewById(R.id.email);
@@ -62,8 +63,8 @@ public class SignUp extends AppCompatActivity {
         String lastName = textInputEditTextLastName.getText().toString().trim();
         String email = textInputEditTextEmail.getText().toString().trim();
         String password = textInputEditTextPassword.getText().toString().trim();
-        // Default is 0 until user joins competition
-        String competitionId = "0";
+        // Default until user joins competition
+        String competitionId = "not enrolled";
 
         // input validation - field not empty
         if(firstName.isEmpty()) {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CreateComp">
+    tools:context=".ui.Home">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -14,8 +14,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/wlc_crop_textonly"
-        android:contentDescription="@string/app_banner" />
+        app:srcCompat="@drawable/wlc_crop_textonly" />
 
     <Button
         android:id="@+id/buttonHome"
@@ -60,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
+        android:id="@+id/joinCompRelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -74,91 +73,35 @@
             android:id="@+id/tvText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="@string/create_competition" />
+            android:text="Current Competition" />
 
         <View
-            android:background="@color/slate_blue"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="0dp"
             android:layout_toLeftOf="@id/tvText"
-            android:layout_marginStart="0dp"
-            android:layout_toStartOf="@id/tvText" />
+            android:background="@color/slate_blue" />
 
         <View
-            android:background="@color/slate_blue"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_centerVertical="true"
             android:layout_marginRight="0dp"
             android:layout_toRightOf="@id/tvText"
-            android:layout_marginEnd="0dp"
-            android:layout_toEndOf="@id/tvText" />
+            android:background="@color/slate_blue" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/compList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvText"
+            android:layout_marginBottom="10dp"/>
 
     </RelativeLayout>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/compName"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="60dp"
-        android:drawableRight="@drawable/ic_baseline_people_24"
-        android:drawableEnd="@drawable/ic_baseline_people_24"
-        android:ems="10"
-        android:hint="@string/competition_name"
-        android:inputType="text"
-        android:maxLength="30"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/compStartDate"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="60dp"
-        android:drawableRight="@drawable/ic_baseline_date_range_24"
-        android:drawableEnd="@drawable/ic_baseline_date_range_24"
-        android:ems="10"
-        android:hint="@string/start_date"
-        android:inputType="text"
-        android:cursorVisible="false"
-        android:focusableInTouchMode="false"
-        android:nextFocusDown="@+id/compLength"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/compName" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/compLength"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="60dp"
-        android:drawableRight="@drawable/ic_baseline_date_range_24"
-        android:drawableEnd="@drawable/ic_baseline_date_range_24"
-        android:ems="10"
-        android:hint="@string/length_weeks"
-        android:inputType="text"
-        android:maxLength="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/compStartDate" />
-
-    <Button
-        android:id="@+id/buttonCreateComp"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="@string/create_competition"
-        android:textColor="@color/dull_yellow"
-        app:backgroundTint="@color/slate_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/compLength" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

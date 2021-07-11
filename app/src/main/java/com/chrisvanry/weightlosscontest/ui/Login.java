@@ -20,6 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 // TODO Lock orientation to portrait
+// TODO ability to press enter to login
 
 public class Login extends AppCompatActivity {
 
@@ -99,15 +100,20 @@ public class Login extends AppCompatActivity {
                     //redirect to home activity
                     Intent intent = new Intent(getApplicationContext(), Home.class);
                     startActivity(intent);
+                    toastMessage("Login successful");
                     finish();
                 } else {
-                    Toast.makeText(Login.this, "Login failed - check credentials and try again", Toast.LENGTH_LONG).show();
+                    toastMessage("Login failed - check credentials and try again");
                 }
                 progressBar.setVisibility(View.GONE);
 
             }
         });
 
+    }
+
+    private void toastMessage(String message){
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 
 }

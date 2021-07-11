@@ -14,7 +14,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/wlc_crop_textonly" />
+        app:srcCompat="@drawable/wlc_crop_textonly"
+        android:contentDescription="@string/app_banner" />
 
     <Button
         android:id="@+id/buttonHome"
@@ -76,23 +77,27 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="Current Competition" />
+            android:text="@string/current_competition" />
 
         <View
+            android:background="@color/slate_blue"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="0dp"
             android:layout_toLeftOf="@id/tvText"
-            android:background="@color/slate_blue" />
+            android:layout_marginStart="0dp"
+            android:layout_toStartOf="@id/tvText" />
 
         <View
+            android:background="@color/slate_blue"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="0dp"
             android:layout_toRightOf="@id/tvText"
-            android:background="@color/slate_blue" />
+            android:layout_marginEnd="0dp"
+            android:layout_toEndOf="@id/tvText" />
 
     </RelativeLayout>
 
@@ -101,7 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="[Competition Name]"
+        android:text="@string/loading"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,8 +118,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="View Details"
+        android:text="@string/view_details"
         android:textColor="@color/dull_yellow"
+        android:visibility="gone"
         app:backgroundTint="@color/slate_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,6 +134,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/join_competition"
         android:textColor="@color/dull_yellow"
+        android:visibility="gone"
         app:backgroundTint="@color/slate_blue"
         app:layout_constraintEnd_toStartOf="@+id/buttonCreateComp"
         app:layout_constraintHorizontal_bias="0.5"
@@ -142,6 +149,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/create_competition"
         android:textColor="@color/dull_yellow"
+        android:visibility="gone"
         app:backgroundTint="@color/slate_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -154,8 +162,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Record Weight"
+        android:text="@string/record_weight"
         android:textColor="@color/dull_yellow"
+        android:visibility="gone"
         app:backgroundTint="@color/slate_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -10,8 +10,6 @@ import com.chrisvanry.weightlosscontest.ui.Login;
 
 public class Splash extends AppCompatActivity {
 
-    // TODO stretched splash image
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

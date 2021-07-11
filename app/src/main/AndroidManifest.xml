@@ -11,8 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeightLossContest">
-        <activity android:name=".ui.CreateComp"></activity>
-        <activity android:name=".ui.CompDetails" />
+
         <activity
             android:name=".ui.Splash"
             android:theme="@style/SplashTheme">
@@ -31,6 +30,16 @@
         <activity
             android:name=".ui.Home"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".ui.CreateComp"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".ui.JoinComp"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".ui.CompDetails"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+
     </application>
 
 </manifest>

@@ -14,13 +14,15 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/wlc_crop" />
+        app:srcCompat="@drawable/wlc_crop"
+        android:contentDescription="@string/app_banner" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/email"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:drawableRight="@drawable/ic_email"
+        android:drawableEnd="@drawable/ic_email"
         android:ems="10"
         android:hint="@string/email_address"
         android:inputType="textEmailAddress"
@@ -36,6 +38,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:drawableRight="@drawable/ic_password"
+        android:drawableEnd="@drawable/ic_password"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"

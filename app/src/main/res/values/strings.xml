@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WeightLossContest</string>
+    <string name="app_name">Weight Loss Contest</string>
     <string name="password">password</string>
     <string name="log_in">Log in</string>
     <string name="email_address">email address</string>
@@ -13,4 +13,14 @@
     <string name="logout">Logout</string>
     <string name="join_competition">Join Competition</string>
     <string name="create_competition">Create Competition</string>
+    <string name="create_competition">Create Competition</string>
+    <string name="competition_name">competition name</string>
+    <string name="start_date">start date</string>
+    <string name="length_weeks">length (weeks)</string>
+    <string name="app_banner">app banner</string>
+    <string name="current_competition">Current Competition</string>
+    <string name="loading">- LOADING -</string>
+    <string name="view_details">View Details</string>
+    <string name="record_weight">Record Weight</string>
+    <string name="create_new_user">Create New User</string>
 </resources>

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,16 +33,15 @@ public class Home extends AppCompatActivity {
     // TODO hamburger menu
     // TODO back button should return to HOME
     // TODO proper hide/view of buttons
+    // TODO settings button
 
     private static final String TAG = "ViewDatabase";
 
     private TextView textViewCurrentComp;
 
     // Firebase stuff
-    private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference myRef;
     private String userID;
 
     @Override
@@ -49,16 +49,20 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // Nav buttons
+        // Button buttonSettings = findViewById(R.id.buttonSettings);
         Button buttonLogout = findViewById(R.id.buttonLogout);
+
         textViewCurrentComp = findViewById(R.id.textViewCurrentComp);
         Button buttonCompetition = findViewById(R.id.buttonCompetition);
         Button buttonJoinComp = findViewById(R.id.buttonJoinComp);
         Button buttonCreateComp = findViewById(R.id.buttonCreateComp);
+        Button buttonRecordWeight = findViewById(R.id.buttonRecordWeight);
 
-        // Declare the database reference object - used to access database
+        // Firebase stuff
         mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = mFirebaseDatabase.getReference();
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
 
@@ -69,81 +73,90 @@ public class Home extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    toastMessage("Successfully logged in with: " + user.getEmail());
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-                    toastMessage("Successfully logged out.");
                 }
             }
         };
 
         myRef.addValueEventListener(new ValueEventListener() {
+            // Reads database once on creation and each time a change is made
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method will read the database once when the activity starts
-                // and whenever any changes are made, returns compID
-                int compID = showData(dataSnapshot);
-                // If user not enrolled, show text and hide details button
-                if (compID == 0){
+                User currentUser = getUserData(dataSnapshot);
+                String compID = currentUser.getCompetitionId();
+                String notEnrolled = "not enrolled";
+                // If user not enrolled, show text and hide details and record buttons
+                if (compID.equals(notEnrolled)){
                     textViewCurrentComp.setText("- Not Enrolled -");
-                    buttonCompetition.setVisibility(View.GONE);
-
+                    buttonJoinComp.setVisibility(View.VISIBLE);
+                    buttonCreateComp.setVisibility(View.VISIBLE);
                     // If user enrolled, display comp name and hide create/join button
                 } else {
-                    textViewCurrentComp.setText("Example Comp");
-                    buttonJoinComp.setVisibility(View.GONE);
-                    buttonCreateComp.setVisibility(View.GONE);
+                    Competition currentComp = getCompData(dataSnapshot, compID);
+                    textViewCurrentComp.setText(currentComp.getName());
+                    buttonCompetition.setVisibility(View.VISIBLE);
+                    buttonRecordWeight.setVisibility(View.VISIBLE);
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
-        //OnClick listener for logout button
+        // OnClick listener for logout button
         buttonLogout.setOnClickListener(v -> {
             // Logout and redirect to login screen
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            toastMessage("Logout successful");
+            finish();
+        });
+
+        // OnClick listener for create competition button
+        buttonCreateComp.setOnClickListener(v -> {
+            // direct to create comp screen
+            Intent intent = new Intent(getApplicationContext(), CreateComp.class);
             startActivity(intent);
             finish();
         });
 
     }
 
-    private int showData(DataSnapshot dataSnapshot) {
+    private User getUserData(DataSnapshot dataSnapshot) {
 
-        int compID = 0;
+        User currentUser = new User();
 
-        for(DataSnapshot ds : dataSnapshot.getChildren()){
-            User currentUser = new User();
-            currentUser.setFirstName(ds.child(userID).getValue(User.class).getFirstName()); // set the first name
-            currentUser.setLastName(ds.child(userID).getValue(User.class).getLastName()); // set the last name
-            currentUser.setEmail(ds.child(userID).getValue(User.class).getEmail()); // set the email
-            currentUser.setCompetitionId(ds.child(userID).getValue(User.class).getCompetitionId()); // set the comp ID
+        currentUser.setFirstName(dataSnapshot.child("Users").child(userID).child("firstName").getValue().toString());
+        currentUser.setLastName(dataSnapshot.child("Users").child(userID).child("lastName").getValue().toString());
+        currentUser.setEmail(dataSnapshot.child("Users").child(userID).child("email").getValue().toString());
+        currentUser.setCompetitionId(dataSnapshot.child("Users").child(userID).child("competitionId").getValue().toString());
 
-            //display all the information
-            Log.d(TAG, "showData: First name: " + currentUser.getFirstName());
-            Log.d(TAG, "showData: Last name: " + currentUser.getLastName());
-            Log.d(TAG, "showData: Email: " + currentUser.getEmail());
-            Log.d(TAG, "showData: Comp ID: " + currentUser.getCompetitionId());
+        // display all the information
+        Log.d(TAG, "showData: First name: " + currentUser.getFirstName());
+        Log.d(TAG, "showData: Last name: " + currentUser.getLastName());
+        Log.d(TAG, "showData: Email: " + currentUser.getEmail());
+        Log.d(TAG, "showData: Comp ID: " + currentUser.getCompetitionId());
 
-//            ArrayList<String> array  = new ArrayList<>();
-//            array.add(uInfo.getFirstName());
-//            array.add(uInfo.getLastName());
-//            array.add(uInfo.getEmail());
-//            array.add(uInfo.getCompetitionId());
-//            ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,array);
-//            mListView.setAdapter(adapter);
+        return currentUser;
+    }
 
-            compID = Integer.parseInt(currentUser.getCompetitionId());
+    private Competition getCompData(DataSnapshot dataSnapshot, String compID) {
 
-        }
+        Competition currentComp = new Competition();
 
-        return compID;
+        currentComp.setName(dataSnapshot.child("Competitions").child(compID).child("name").getValue().toString());
+        currentComp.setStartDate(dataSnapshot.child("Competitions").child(compID).child("startDate").getValue().toString());
+        currentComp.setLength(dataSnapshot.child("Competitions").child(compID).child("length").getValue().toString());
+
+        // display all the information
+        Log.d(TAG, "showData: Comp name: " + currentComp.getName());
+        Log.d(TAG, "showData: Start date: " + currentComp.getStartDate());
+        Log.d(TAG, "showData: Length: " + currentComp.getLength());
+
+        return currentComp;
     }
 
     @Override
@@ -160,10 +173,6 @@ public class Home extends AppCompatActivity {
         }
     }
 
-    /**
-     * customizable toast
-     * @param message
-     */
     private void toastMessage(String message){
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
