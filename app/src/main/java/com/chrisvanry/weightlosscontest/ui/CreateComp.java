@@ -33,7 +33,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 // TODO settings button
 // TODO manage options for created competitions
@@ -132,6 +137,8 @@ public class CreateComp extends AppCompatActivity implements DatePickerDialog.On
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        // Adjust offset
+        month += 1;
         String date =  month + "/" + dayOfMonth + "/" + year;
         textInputEditTextCompStartDate.setText(date);
     }
@@ -167,6 +174,16 @@ public class CreateComp extends AppCompatActivity implements DatePickerDialog.On
         // input validation - field not empty
         if(compLength.isEmpty()) {
             textInputEditTextCompLength.setError("Competition length is required");
+            textInputEditTextCompLength.requestFocus();
+            return;
+        }
+
+        // input validation - number input only
+        String regex = "^[0-9]+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(compLength);
+        if(!matcher.matches()) {
+            textInputEditTextCompLength.setError("Number-only input required");
             textInputEditTextCompLength.requestFocus();
             return;
         }

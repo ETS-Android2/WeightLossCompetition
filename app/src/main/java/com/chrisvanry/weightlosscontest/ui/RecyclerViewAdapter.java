@@ -37,33 +37,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: called.");
+        Log.d(TAG, "onBindViewHolder: called");
 
         holder.competitionListItem.setText(mCompNames.get(position));
 
-        holder.joinCompRelativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: " + mCompNames.get(position));
-                Toast.makeText(mContext, mCompNames.get(position), Toast.LENGTH_SHORT).show();
-            }
+        holder.parentLayout.setOnClickListener(v -> {
+            Log.d(TAG, "onClick: clicked on: " + mCompNames.get(position));
+            Toast.makeText(mContext, mCompNames.get(position), Toast.LENGTH_SHORT).show();
         });
     }
 
     @Override
     public int getItemCount() {
+        Log.d(TAG, "getItemCount: " + mCompNames.size());
         return mCompNames.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView competitionListItem;
-        RelativeLayout joinCompRelativeLayout;
+        RelativeLayout parentLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            competitionListItem = itemView.findViewById(R.id.competitionListItem);
-            joinCompRelativeLayout = itemView.findViewById(R.id.joinCompRelativeLayout);
+            competitionListItem = itemView.findViewById(R.id.competition_list_item);
+            parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
 

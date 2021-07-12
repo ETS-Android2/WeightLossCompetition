@@ -32,7 +32,6 @@ public class Home extends AppCompatActivity {
 
     // TODO hamburger menu
     // TODO back button should return to HOME
-    // TODO proper hide/view of buttons
     // TODO settings button
 
     private static final String TAG = "ViewDatabase";
@@ -119,6 +118,14 @@ public class Home extends AppCompatActivity {
         buttonCreateComp.setOnClickListener(v -> {
             // direct to create comp screen
             Intent intent = new Intent(getApplicationContext(), CreateComp.class);
+            startActivity(intent);
+            finish();
+        });
+
+        // OnClick listener for join competition button
+        buttonJoinComp.setOnClickListener(v -> {
+            // direct to create comp screen
+            Intent intent = new Intent(getApplicationContext(), JoinComp.class);
             startActivity(intent);
             finish();
         });

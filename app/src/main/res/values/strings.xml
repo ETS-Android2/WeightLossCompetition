@@ -13,7 +13,6 @@
     <string name="logout">Logout</string>
     <string name="join_competition">Join Competition</string>
     <string name="create_competition">Create Competition</string>
-    <string name="create_competition">Create Competition</string>
     <string name="competition_name">competition name</string>
     <string name="start_date">start date</string>
     <string name="length_weeks">length (weeks)</string>
@@ -23,4 +22,6 @@
     <string name="view_details">View Details</string>
     <string name="record_weight">Record Weight</string>
     <string name="create_new_user">Create New User</string>
+    <string name="list_of_competitions">List of Competitions</string>
+    <string name="bottom">BOTTOM</string>
 </resources>
