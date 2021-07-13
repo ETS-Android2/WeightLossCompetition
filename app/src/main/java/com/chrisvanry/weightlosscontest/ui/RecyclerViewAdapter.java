@@ -13,56 +13,62 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chrisvanry.weightlosscontest.R;
+import com.chrisvanry.weightlosscontest.data.Competition;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerViewAdapter";
-
-    private ArrayList<String> mCompNames = new ArrayList<>();
     private Context mContext;
+    private ArrayList<String> competitionsList;
 
-    public RecyclerViewAdapter(ArrayList<String> mCompNames, Context mContext) {
-        this.mCompNames = mCompNames;
+    public RecyclerViewAdapter(Context mContext, ArrayList<String> competitionsList) {
         this.mContext = mContext;
+        this.competitionsList = competitionsList;
+    }
+
+    @NonNull
+    @Override
+    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.competition_list_item, parent, false);
+
+        return new ViewHolder(view);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_list_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
-    }
+    public void onBindViewHolder(@NonNull RecyclerViewAdapter.ViewHolder holder, int position) {
 
-    @Override
-    public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: called");
+        // Textview - competition name
+        holder.textView.setText(competitionsList.get(position));
 
-        holder.competitionListItem.setText(mCompNames.get(position));
-
+        // onClick listener
         holder.parentLayout.setOnClickListener(v -> {
-            Log.d(TAG, "onClick: clicked on: " + mCompNames.get(position));
-            Toast.makeText(mContext, mCompNames.get(position), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onClick: clicked on: " + competitionsList.get(position));
+            Toast.makeText(mContext, competitionsList.get(position), Toast.LENGTH_SHORT).show();
         });
     }
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount: " + mCompNames.size());
-        return mCompNames.size();
+        return competitionsList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView competitionListItem;
+        // widgets
         RelativeLayout parentLayout;
+        TextView textView;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            competitionListItem = itemView.findViewById(R.id.competition_list_item);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
+
+            textView = itemView.findViewById(R.id.textView);
+            parentLayout = itemView.findViewById(R.id.parentLayout);
         }
+
     }
 
 }

@@ -6,117 +6,111 @@
     android:layout_height="match_parent"
     tools:context=".ui.Home">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/wlc_crop_textonly" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/buttonHome"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/home"
-        android:textColor="@color/dull_yellow"
-        app:backgroundTint="@color/slate_blue"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        <ImageView
+            android:id="@+id/bannerImage"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:contentDescription="@string/app_banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/wlc_crop_textonly" />
 
-    <Button
-        android:id="@+id/buttonSettings"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/settings"
-        android:textColor="@color/dull_yellow"
-        app:backgroundTint="@color/slate_blue"
-        app:layout_constraintEnd_toStartOf="@+id/buttonLogout"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonHome"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <Button
-        android:id="@+id/buttonLogout"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/logout"
-        android:textColor="@color/dull_yellow"
-        app:backgroundTint="@color/slate_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonSettings"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <RelativeLayout
-        android:id="@+id/join_comp_relative_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSettings">
-
-        <TextView
-            android:id="@+id/tvText"
+        <Button
+            android:id="@+id/buttonHome"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/list_of_competitions" />
+            android:layout_marginTop="40dp"
+            android:text="@string/home"
+            android:textColor="@color/dull_yellow"
+            app:backgroundTint="@color/slate_blue"
+            app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bannerImage" />
+
+        <Button
+            android:id="@+id/buttonSettings"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/settings"
+            android:textColor="@color/dull_yellow"
+            app:backgroundTint="@color/slate_blue"
+            app:layout_constraintEnd_toStartOf="@+id/buttonLogout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/buttonHome"
+            app:layout_constraintTop_toBottomOf="@+id/bannerImage" />
+
+        <Button
+            android:id="@+id/buttonLogout"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/logout"
+            android:textColor="@color/dull_yellow"
+            app:backgroundTint="@color/slate_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/buttonSettings"
+            app:layout_constraintTop_toBottomOf="@+id/bannerImage" />
 
         <View
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="0dp"
-            android:layout_toLeftOf="@id/tvText"
+            android:id="@+id/dividerOneTop"
             android:background="@color/slate_blue"
-            android:layout_marginStart="0dp"
-            android:layout_toStartOf="@id/tvText" />
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonSettings" />
+
+        <TextView
+            android:id="@+id/dividerOneText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/list_of_competitions"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dividerOneTop" />
 
         <View
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginRight="0dp"
-            android:layout_toRightOf="@id/tvText"
+            android:id="@+id/dividerOneBottom"
             android:background="@color/slate_blue"
-            android:layout_marginEnd="0dp"
-            android:layout_toEndOf="@id/tvText" />
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dividerOneText" />
 
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/join_comp_relative_layout">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="parent" />
-
-    </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

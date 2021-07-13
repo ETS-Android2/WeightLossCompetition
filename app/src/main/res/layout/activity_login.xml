@@ -7,7 +7,7 @@
     tools:context=".ui.Login">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/heroImage"
         android:layout_width="0dp"
         android:layout_height="195dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/heroImage"
         app:layout_constraintVertical_bias="0.173" />
 
     <com.google.android.material.textfield.TextInputEditText
@@ -53,10 +53,11 @@
         android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"/>
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <Button
         android:id="@+id/buttonLogin"
@@ -71,7 +72,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.298" />
+        app:layout_constraintVertical_bias="0.432" />
 
     <TextView
         android:id="@+id/signUpText"

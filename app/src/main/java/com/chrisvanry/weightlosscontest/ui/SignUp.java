@@ -39,6 +39,8 @@ public class SignUp extends AppCompatActivity {
         textInputEditTextPassword = findViewById(R.id.password);
         Button buttonSignup = findViewById(R.id.buttonSignup);
         TextView textViewLogin = findViewById(R.id.loginText);
+
+        // progress bar
         progressBar = findViewById(R.id.progress);
 
         mAuth = FirebaseAuth.getInstance();

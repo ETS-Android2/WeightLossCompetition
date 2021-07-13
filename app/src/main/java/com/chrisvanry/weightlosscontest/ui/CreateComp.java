@@ -124,6 +124,7 @@ public class CreateComp extends AppCompatActivity implements DatePickerDialog.On
         dialog.show(getSupportFragmentManager(), "create comp message");
     }
 
+    // datepicker pop-up
     private void showDatePickerDialog() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
@@ -135,6 +136,7 @@ public class CreateComp extends AppCompatActivity implements DatePickerDialog.On
         datePickerDialog.show();
     }
 
+    // Get selected data from datepicker
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         // Adjust offset
@@ -152,6 +154,7 @@ public class CreateComp extends AppCompatActivity implements DatePickerDialog.On
         String key = myRef.push().getKey();
         FirebaseUser user = mAuth.getCurrentUser();
         String userID = user.getUid();
+        String ownerId = userID;
 
         String compName = textInputEditTextCompName.getText().toString().trim();
         String compStartDate = textInputEditTextCompStartDate.getText().toString().trim();
@@ -189,7 +192,7 @@ public class CreateComp extends AppCompatActivity implements DatePickerDialog.On
         }
 
         // Create user object with user input
-        Competition competition = new Competition(compName, compStartDate, compLength);
+        Competition competition = new Competition(ownerId, compName, compStartDate, compLength);
 
         // Write object values to Firebase
         myRef.child("Competitions").child(key).setValue(competition);

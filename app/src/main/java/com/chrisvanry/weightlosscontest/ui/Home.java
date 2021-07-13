@@ -37,6 +37,7 @@ public class Home extends AppCompatActivity {
     private static final String TAG = "ViewDatabase";
 
     private TextView textViewCurrentComp;
+    private ProgressBar progressBar;
 
     // Firebase stuff
     private FirebaseAuth mAuth;
@@ -57,6 +58,9 @@ public class Home extends AppCompatActivity {
         Button buttonJoinComp = findViewById(R.id.buttonJoinComp);
         Button buttonCreateComp = findViewById(R.id.buttonCreateComp);
         Button buttonRecordWeight = findViewById(R.id.buttonRecordWeight);
+
+        // progress bar
+        progressBar = findViewById(R.id.progress);
 
         // Firebase stuff
         mAuth = FirebaseAuth.getInstance();
@@ -79,6 +83,9 @@ public class Home extends AppCompatActivity {
             }
         };
 
+        // Display progress bar while loading from Firebase
+        progressBar.setVisibility(View.VISIBLE);
+
         myRef.addValueEventListener(new ValueEventListener() {
             // Reads database once on creation and each time a change is made
             @Override
@@ -88,12 +95,14 @@ public class Home extends AppCompatActivity {
                 String notEnrolled = "not enrolled";
                 // If user not enrolled, show text and hide details and record buttons
                 if (compID.equals(notEnrolled)){
+                    progressBar.setVisibility(View.GONE);
                     textViewCurrentComp.setText("- Not Enrolled -");
                     buttonJoinComp.setVisibility(View.VISIBLE);
                     buttonCreateComp.setVisibility(View.VISIBLE);
                     // If user enrolled, display comp name and hide create/join button
                 } else {
                     Competition currentComp = getCompData(dataSnapshot, compID);
+                    progressBar.setVisibility(View.GONE);
                     textViewCurrentComp.setText(currentComp.getName());
                     buttonCompetition.setVisibility(View.VISIBLE);
                     buttonRecordWeight.setVisibility(View.VISIBLE);

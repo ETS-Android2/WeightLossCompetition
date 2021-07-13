@@ -24,4 +24,5 @@
     <string name="create_new_user">Create New User</string>
     <string name="list_of_competitions">List of Competitions</string>
     <string name="bottom">BOTTOM</string>
+    <string name="list_item_competition_name">Competition Name</string>
 </resources>

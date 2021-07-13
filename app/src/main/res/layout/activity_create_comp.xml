@@ -7,7 +7,7 @@
     tools:context=".ui.CreateComp">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/bannerImage"
         android:layout_width="0dp"
         android:layout_height="56dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/bannerImage" />
 
     <Button
         android:id="@+id/buttonSettings"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonLogout"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonHome"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/bannerImage" />
 
     <Button
         android:id="@+id/buttonLogout"
@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonSettings"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/bannerImage" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -71,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonSettings">
 
         <TextView
-            android:id="@+id/tvText"
+            android:id="@+id/dividerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -85,9 +85,9 @@
             android:layout_height="2dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="0dp"
-            android:layout_toLeftOf="@id/tvText"
+            android:layout_toLeftOf="@id/dividerText"
             android:layout_marginStart="0dp"
-            android:layout_toStartOf="@id/tvText" />
+            android:layout_toStartOf="@id/dividerText" />
 
         <View
             android:background="@color/slate_blue"
@@ -95,9 +95,9 @@
             android:layout_height="2dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="0dp"
-            android:layout_toRightOf="@id/tvText"
+            android:layout_toRightOf="@id/dividerText"
             android:layout_marginEnd="0dp"
-            android:layout_toEndOf="@id/tvText" />
+            android:layout_toEndOf="@id/dividerText" />
 
     </RelativeLayout>
 
