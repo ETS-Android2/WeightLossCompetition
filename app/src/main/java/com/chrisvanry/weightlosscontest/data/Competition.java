@@ -4,18 +4,19 @@ package com.chrisvanry.weightlosscontest.data;
 
 public class Competition {
 
-    public String ownerId, name, startDate, length;
+    public String ownerId, name, startDate, length, competitionId;
 
     public Competition() {
 
     }
 
     // constructor
-    public Competition(String ownerId, String name, String startDate, String length) {
+    public Competition(String ownerId, String name, String startDate, String length, String competitionId) {
         this.ownerId = ownerId;
         this.name = name;
         this.startDate = startDate;
         this.length = length;
+        this.competitionId = competitionId;
     }
 
     // getters and setters
@@ -51,13 +52,22 @@ public class Competition {
         this.length = length;
     }
 
+    public String getCompetitionId() {
+        return competitionId;
+    }
+
+    public void setCompetitionId(String competitionId) {
+        this.competitionId = competitionId;
+    }
+
     @Override
     public String toString() {
-        return  "Competition{" +
+        return "Competition{" +
                 "ownerId='" + ownerId + '\'' +
-                "name='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", startDate='" + startDate + '\'' +
                 ", length='" + length + '\'' +
+                ", competitionId='" + competitionId + '\'' +
                 '}';
     }
 }

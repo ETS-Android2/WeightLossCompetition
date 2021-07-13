@@ -1,6 +1,7 @@
 package com.chrisvanry.weightlosscontest.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,20 +18,20 @@ import com.chrisvanry.weightlosscontest.data.Competition;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class CompListRecyclerViewAdapter extends RecyclerView.Adapter<CompListRecyclerViewAdapter.ViewHolder> {
 
-    private static final String TAG = "RecyclerViewAdapter";
+    private static final String TAG = "CompListRecycler";
     private Context mContext;
-    private ArrayList<String> competitionsList;
+    private ArrayList<Competition> competitionsList;
 
-    public RecyclerViewAdapter(Context mContext, ArrayList<String> competitionsList) {
+    public CompListRecyclerViewAdapter(Context mContext, ArrayList<Competition> competitionsList) {
         this.mContext = mContext;
         this.competitionsList = competitionsList;
     }
 
     @NonNull
     @Override
-    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CompListRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.competition_list_item, parent, false);
@@ -39,15 +40,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CompListRecyclerViewAdapter.ViewHolder holder, int position) {
+
+        String competitionId = competitionsList.get(position).getCompetitionId();
 
         // Textview - competition name
-        holder.textView.setText(competitionsList.get(position));
+        holder.textView.setText(competitionsList.get(position).getName());
 
         // onClick listener
         holder.parentLayout.setOnClickListener(v -> {
-            Log.d(TAG, "onClick: clicked on: " + competitionsList.get(position));
-            Toast.makeText(mContext, competitionsList.get(position), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onClick: compID: " + competitionsList.get(position).getCompetitionId());
+            Intent intent = new Intent(v.getContext(), CompDetails.class);
+            intent.putExtra("comp_id", competitionId);
+            v.getContext().startActivity(intent);
         });
     }
 

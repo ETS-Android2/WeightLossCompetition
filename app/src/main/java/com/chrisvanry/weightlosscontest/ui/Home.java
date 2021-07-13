@@ -31,7 +31,6 @@ import java.util.ArrayList;
 public class Home extends AppCompatActivity {
 
     // TODO hamburger menu
-    // TODO back button should return to HOME
     // TODO settings button
 
     private static final String TAG = "ViewDatabase";
@@ -54,10 +53,10 @@ public class Home extends AppCompatActivity {
         Button buttonLogout = findViewById(R.id.buttonLogout);
 
         textViewCurrentComp = findViewById(R.id.textViewCurrentComp);
-        Button buttonCompetition = findViewById(R.id.buttonCompetition);
+        Button buttonCompDetails = findViewById(R.id.buttonCompDetails);
         Button buttonJoinComp = findViewById(R.id.buttonJoinComp);
         Button buttonCreateComp = findViewById(R.id.buttonCreateComp);
-        Button buttonRecordWeight = findViewById(R.id.buttonRecordWeight);
+        Button buttonViewAll = findViewById(R.id.buttonViewAll);
 
         // progress bar
         progressBar = findViewById(R.id.progress);
@@ -104,8 +103,8 @@ public class Home extends AppCompatActivity {
                     Competition currentComp = getCompData(dataSnapshot, compID);
                     progressBar.setVisibility(View.GONE);
                     textViewCurrentComp.setText(currentComp.getName());
-                    buttonCompetition.setVisibility(View.VISIBLE);
-                    buttonRecordWeight.setVisibility(View.VISIBLE);
+                    buttonCompDetails.setVisibility(View.VISIBLE);
+                    buttonViewAll.setVisibility(View.VISIBLE);
                 }
             }
             @Override
@@ -123,20 +122,25 @@ public class Home extends AppCompatActivity {
             finish();
         });
 
-        // OnClick listener for create competition button
-        buttonCreateComp.setOnClickListener(v -> {
-            // direct to create comp screen
-            Intent intent = new Intent(getApplicationContext(), CreateComp.class);
-            startActivity(intent);
-            finish();
-        });
-
         // OnClick listener for join competition button
         buttonJoinComp.setOnClickListener(v -> {
             // direct to create comp screen
             Intent intent = new Intent(getApplicationContext(), JoinComp.class);
             startActivity(intent);
-            finish();
+        });
+
+        // OnClick listener for create competition button
+        buttonCreateComp.setOnClickListener(v -> {
+            // direct to create comp screen
+            Intent intent = new Intent(getApplicationContext(), CreateComp.class);
+            startActivity(intent);
+        });
+
+        // OnClick listener for all competitions button
+        buttonViewAll.setOnClickListener(v -> {
+            // direct to create comp screen
+            Intent intent = new Intent(getApplicationContext(), JoinComp.class);
+            startActivity(intent);
         });
 
     }

@@ -6,12 +6,110 @@
     android:layout_height="match_parent"
     tools:context=".ui.CompDetails">
 
-    <WebView
-        android:id="@+id/webViewCompDetails"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/bannerImage"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:contentDescription="@string/app_banner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/wlc_crop_textonly" />
+
+    <Button
+        android:id="@+id/buttonHome"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="40dp"
+        android:text="@string/home"
+        android:textColor="@color/dull_yellow"
+        app:backgroundTint="@color/slate_blue"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bannerImage" />
+
+    <Button
+        android:id="@+id/buttonSettings"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/settings"
+        android:textColor="@color/dull_yellow"
+        app:backgroundTint="@color/slate_blue"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLogout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonHome"
+        app:layout_constraintTop_toBottomOf="@+id/bannerImage" />
+
+    <Button
+        android:id="@+id/buttonLogout"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/logout"
+        android:textColor="@color/dull_yellow"
+        app:backgroundTint="@color/slate_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonSettings"
+        app:layout_constraintTop_toBottomOf="@+id/bannerImage" />
+
+    <View
+        android:id="@+id/dividerOneTop"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/slate_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSettings" />
+
+    <TextView
+        android:id="@+id/dividerOneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/competition_details"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerOneTop" />
+
+    <View
+        android:id="@+id/dividerOneBottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/slate_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerOneText" />
+
+    <TextView
+        android:id="@+id/textViewCurrentComp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/loading"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerOneBottom" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCurrentComp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

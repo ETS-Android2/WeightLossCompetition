@@ -25,4 +25,6 @@
     <string name="list_of_competitions">List of Competitions</string>
     <string name="bottom">BOTTOM</string>
     <string name="list_item_competition_name">Competition Name</string>
+    <string name="competition_details">Competition Details</string>
+    <string name="competitions_list">Competitions List</string>
 </resources>

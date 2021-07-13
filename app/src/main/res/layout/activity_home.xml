@@ -10,17 +10,17 @@
         android:id="@+id/bannerImage"
         android:layout_width="0dp"
         android:layout_height="56dp"
+        android:contentDescription="@string/app_banner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/wlc_crop_textonly"
-        android:contentDescription="@string/app_banner" />
+        app:srcCompat="@drawable/wlc_crop_textonly" />
 
     <Button
         android:id="@+id/buttonHome"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/home"
@@ -34,7 +34,7 @@
     <Button
         android:id="@+id/buttonSettings"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/settings"
@@ -48,7 +48,7 @@
     <Button
         android:id="@+id/buttonLogout"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/logout"
@@ -59,47 +59,37 @@
         app:layout_constraintStart_toEndOf="@+id/buttonSettings"
         app:layout_constraintTop_toBottomOf="@+id/bannerImage" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
+    <View
+        android:id="@+id/dividerOneTop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_height="1dp"
         android:layout_marginTop="40dp"
+        android:background="@color/slate_blue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSettings">
+        app:layout_constraintTop_toBottomOf="@+id/buttonSettings" />
 
-        <TextView
-            android:id="@+id/dividerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/current_competition" />
+    <TextView
+        android:id="@+id/dividerOneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/current_competition"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerOneTop" />
 
-        <View
-            android:background="@color/slate_blue"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="0dp"
-            android:layout_toLeftOf="@id/dividerText"
-            android:layout_marginStart="0dp"
-            android:layout_toStartOf="@id/dividerText" />
-
-        <View
-            android:background="@color/slate_blue"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="0dp"
-            android:layout_toRightOf="@id/dividerText"
-            android:layout_marginEnd="0dp"
-            android:layout_toEndOf="@id/dividerText" />
-
-    </RelativeLayout>
+    <View
+        android:id="@+id/dividerOneBottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/slate_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerOneText" />
 
     <TextView
         android:id="@+id/textViewCurrentComp"
@@ -110,7 +100,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/dividerOneBottom" />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -123,25 +113,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewCurrentComp" />
 
     <Button
-        android:id="@+id/buttonCompetition"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/view_details"
-        android:textColor="@color/dull_yellow"
-        android:visibility="gone"
-        app:backgroundTint="@color/slate_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCurrentComp" />
-
-    <Button
         android:id="@+id/buttonJoinComp"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:text="@string/join_competition"
         android:textColor="@color/dull_yellow"
         android:visibility="gone"
@@ -154,9 +130,9 @@
     <Button
         android:id="@+id/buttonCreateComp"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:text="@string/create_competition"
         android:textColor="@color/dull_yellow"
         android:visibility="gone"
@@ -167,27 +143,32 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewCurrentComp" />
 
     <Button
-        android:id="@+id/buttonRecordWeight"
+        android:id="@+id/buttonViewAll"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="@string/record_weight"
+        android:text="@string/competitions_list"
         android:textColor="@color/dull_yellow"
         android:visibility="gone"
         app:backgroundTint="@color/slate_blue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonCompDetails"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCurrentComp" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_marginTop="104dp"
-        android:background="@color/slate_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+    <Button
+        android:id="@+id/buttonCompDetails"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/view_details"
+        android:textColor="@color/dull_yellow"
+        android:visibility="gone"
+        app:backgroundTint="@color/slate_blue"
+        app:layout_constraintEnd_toStartOf="@+id/buttonViewAll"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCurrentComp" />
 
