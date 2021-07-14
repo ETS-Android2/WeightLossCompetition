@@ -6,9 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_margin="10dp"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardElevation="4dp"
@@ -23,11 +23,11 @@
 
             <TextView
                 android:id="@+id/textView"
-                android:text="@string/list_item_competition_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="center"
+                android:text="@string/list_item_competition_name"
                 android:textSize="30sp" />
 
         </RelativeLayout>

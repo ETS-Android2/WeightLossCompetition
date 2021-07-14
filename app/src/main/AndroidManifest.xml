@@ -34,7 +34,7 @@
             android:name=".ui.CreateComp"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".ui.JoinComp"
+            android:name=".ui.CompList"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".ui.CompDetails"

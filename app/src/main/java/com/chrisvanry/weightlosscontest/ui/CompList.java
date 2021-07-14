@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class JoinComp extends AppCompatActivity {
+public class CompList extends AppCompatActivity {
 
     // widgets
     RecyclerView recyclerView;
@@ -35,12 +35,12 @@ public class JoinComp extends AppCompatActivity {
     private ArrayList<Competition> competitionsList;
     private CompListRecyclerViewAdapter compListRecyclerViewAdapter;
 
-    private static final String TAG = "JoinCompActivity";
+    private static final String TAG = "CompListActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_join_comp);
+        setContentView(R.layout.activity_comp_list);
 
         // Nav buttons
         Button buttonHome = findViewById(R.id.buttonHome);

@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -17,7 +15,6 @@ import android.widget.Toast;
 import com.chrisvanry.weightlosscontest.R;
 import com.chrisvanry.weightlosscontest.data.Competition;
 import com.chrisvanry.weightlosscontest.data.User;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,8 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
 
@@ -42,6 +37,8 @@ public class Home extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String userID;
+
+    private String compID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +87,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User currentUser = getUserData(dataSnapshot);
-                String compID = currentUser.getCompetitionId();
+                compID = currentUser.getCompetitionId();
                 String notEnrolled = "not enrolled";
                 // If user not enrolled, show text and hide details and record buttons
                 if (compID.equals(notEnrolled)){
@@ -114,7 +111,7 @@ public class Home extends AppCompatActivity {
 
         // OnClick listener for logout button
         buttonLogout.setOnClickListener(v -> {
-            // Logout and redirect to login screen
+            // Logout and redirect to login activity
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
@@ -124,22 +121,31 @@ public class Home extends AppCompatActivity {
 
         // OnClick listener for join competition button
         buttonJoinComp.setOnClickListener(v -> {
-            // direct to create comp screen
-            Intent intent = new Intent(getApplicationContext(), JoinComp.class);
+            // direct to comp list activity
+            Intent intent = new Intent(getApplicationContext(), CompList.class);
             startActivity(intent);
         });
 
         // OnClick listener for create competition button
         buttonCreateComp.setOnClickListener(v -> {
-            // direct to create comp screen
+            // direct to create comp activity
             Intent intent = new Intent(getApplicationContext(), CreateComp.class);
             startActivity(intent);
         });
 
-        // OnClick listener for all competitions button
+        // onClick listener for view details button
+        buttonCompDetails.setOnClickListener(v -> {
+            // direct to comp details activity and pass compID
+            Log.d(TAG, "onClick: compID: " + compID);
+            Intent intent = new Intent(getApplicationContext(), CompDetails.class);
+            intent.putExtra("comp_id", compID);
+            startActivity(intent);
+        });
+
+        // OnClick listener for comp list button
         buttonViewAll.setOnClickListener(v -> {
             // direct to create comp screen
-            Intent intent = new Intent(getApplicationContext(), JoinComp.class);
+            Intent intent = new Intent(getApplicationContext(), CompList.class);
             startActivity(intent);
         });
 
