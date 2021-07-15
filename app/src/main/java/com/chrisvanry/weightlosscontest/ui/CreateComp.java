@@ -200,9 +200,9 @@ public class CreateComp extends AppCompatActivity implements DatePickerDialog.On
 
         // Create 0 value entries for each week in Firebase
         int compLengthInt = Integer.parseInt(compLength);
-        String compWeek = "week";
         for (int i = 1; i <= compLengthInt; i++) {
-            myRef.child("Entries").child(key).child(userID).child("week" + i).setValue("0");
+            String weekNum = String.valueOf(i);
+            myRef.child("Entries").child(key).child(userID).child(weekNum).setValue("0");
         }
 
         // Update user competitionID in Firebase

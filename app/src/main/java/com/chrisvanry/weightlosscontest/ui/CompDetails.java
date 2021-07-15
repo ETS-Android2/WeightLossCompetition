@@ -17,6 +17,12 @@ import android.widget.Toast;
 import com.chrisvanry.weightlosscontest.R;
 import com.chrisvanry.weightlosscontest.data.Competition;
 import com.chrisvanry.weightlosscontest.data.User;
+import com.chrisvanry.weightlosscontest.data.WeightEntry;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +33,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,9 +52,12 @@ public class CompDetails extends AppCompatActivity {
 
     // Firebase stuff
     private FirebaseAuth mAuth;
-    private String userID;
+    private String userId;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;;
+
+    // MP Android Chart
+    private LineChart mpLineChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +75,7 @@ public class CompDetails extends AppCompatActivity {
         Button buttonLogout = findViewById(R.id.buttonLogout);
 
         textViewCurrentComp = findViewById(R.id.textViewCurrentComp);
+        mpLineChart = findViewById(R.id.lineChart);
         buttonJoinComp = findViewById(R.id.buttonJoinComp);
         buttonRecordWeight = findViewById(R.id.buttonRecordWeight);
 
@@ -73,9 +85,12 @@ public class CompDetails extends AppCompatActivity {
         // Firebase stuff
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        userID = user.getUid();
+        userId = user.getUid();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
+
+        // MP Android Chart
+
 
         // show progress bar while loading
         progressBar.setVisibility(View.VISIBLE);
@@ -97,6 +112,16 @@ public class CompDetails extends AppCompatActivity {
                 textViewCurrentComp.setText(currentCompName);
 
                 // display chart
+//                LineDataSet lineDataSet1 = new LineDataSet(dataValues1(), "Data Set 1");
+//                LineDataSet lineDataSet2 = new LineDataSet(dataValues2(), "Data Set 2");
+//
+//                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+//                dataSets.add(lineDataSet1);
+//                dataSets.add(lineDataSet2);
+
+//                LineData data = new LineData(dataSets);
+//                mpLineChart.setData(data);
+//                mpLineChart.invalidate();
 
                 String userCompId = currentUser.getCompetitionId();
                 String notEnrolled = "not enrolled";
@@ -162,10 +187,10 @@ public class CompDetails extends AppCompatActivity {
 
         User currentUser = new User();
 
-        currentUser.setFirstName(dataSnapshot.child("Users").child(userID).child("firstName").getValue().toString());
-        currentUser.setLastName(dataSnapshot.child("Users").child(userID).child("lastName").getValue().toString());
-        currentUser.setEmail(dataSnapshot.child("Users").child(userID).child("email").getValue().toString());
-        currentUser.setCompetitionId(dataSnapshot.child("Users").child(userID).child("competitionId").getValue().toString());
+        currentUser.setFirstName(dataSnapshot.child("Users").child(userId).child("firstName").getValue().toString());
+        currentUser.setLastName(dataSnapshot.child("Users").child(userId).child("lastName").getValue().toString());
+        currentUser.setEmail(dataSnapshot.child("Users").child(userId).child("email").getValue().toString());
+        currentUser.setCompetitionId(dataSnapshot.child("Users").child(userId).child("competitionId").getValue().toString());
 
         // display all the information
         Log.d(TAG, "showData User: First name: " + currentUser.getFirstName());
@@ -200,9 +225,9 @@ public class CompDetails extends AppCompatActivity {
 
         // Create 0 value entries for each week in Firebase
         int compLengthInt = Integer.parseInt(currentCompLength);
-        String compWeek = "week";
         for (int i = 1; i <= compLengthInt; i++) {
-            myRef.child("Entries").child(compDetailsId).child(userID).child("week" + i).setValue("0");
+            String weekNum = String.valueOf(i);
+            myRef.child("Entries").child(compDetailsId).child(userID).child(weekNum).setValue("0");
         }
         // write compID to user branch
         myRef.child("Users").child(userID).child("competitionId").setValue(compDetailsId).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -224,6 +249,55 @@ public class CompDetails extends AppCompatActivity {
             }
         });
 
+    }
+
+    private ArrayList<Entry> dataValues1() {
+
+        ArrayList<Entry> dataVals = new ArrayList<>();
+        dataVals.add(new Entry(0,20));
+        dataVals.add(new Entry(1,24));
+        dataVals.add(new Entry(2,2));
+        dataVals.add(new Entry(3,10));
+        return dataVals;
+    }
+
+    private ArrayList<Entry> dataValues2() {
+        ArrayList<Entry> dataVals = new ArrayList<>();
+        dataVals.add(new Entry(0,12));
+        dataVals.add(new Entry(2,16));
+        dataVals.add(new Entry(3,23));
+        dataVals.add(new Entry(5,1));
+        dataVals.add(new Entry(7,18));
+        return dataVals;
+    }
+
+    private ArrayList<WeightEntry> setChartDataValues(DataSnapshot dataSnapshot, String compDetailsId, String memberUserId, String currentCompLength) {
+
+
+        // retrieve entry key/value pairs
+        int compLengthInt = Integer.parseInt(currentCompLength);
+        for (int i = 1; i <= compLengthInt; i++) {
+            String weekNum = String.valueOf(i);
+            myRef.child("Entries").child(compDetailsId).child(userID).child(weekNum).setValue("0");
+        }
+
+        ArrayList<Entry> dataVals = new ArrayList<>();
+
+        return dataVals;
+    }
+
+    private ArrayList<WeightEntry> getWeightEntries(DataSnapshot dataSnapshot, String compDetailsId, String memberUserId) {
+
+        // Arraylist to store object(s)
+        ArrayList<WeightEntry> weightEntries = new ArrayList<>();
+
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            Competition competition = snapshot.getValue(Competition.class);
+
+
+
+
+        return weightEntries
     }
 
     private void toastMessage(String message){
