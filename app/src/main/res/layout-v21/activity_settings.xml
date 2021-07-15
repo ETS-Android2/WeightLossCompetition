@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CreateComp">
+    tools:context=".ui.Settings">
 
     <ImageView
         android:id="@+id/bannerImage"
@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="@string/create_competition"
+        android:text="@string/settings"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,62 +91,113 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dividerOneText" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/compName"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="60dp"
-        android:drawableRight="@drawable/ic_baseline_people_24"
-        android:drawableEnd="@drawable/ic_baseline_people_24"
-        android:ems="10"
-        android:hint="@string/competition_name"
-        android:inputType="text"
-        android:maxLength="30"
+    <Switch
+        android:id="@+id/notifyToggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:text="@string/enable_weekly_weigh_in_reminders"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dividerOneBottom" />
+        app:layout_constraintTop_toBottomOf="@+id/dividerOneBottom"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/compStartDate"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="60dp"
-        android:drawableRight="@drawable/ic_baseline_date_range_24"
-        android:drawableEnd="@drawable/ic_baseline_date_range_24"
-        android:ems="10"
-        android:hint="@string/start_date"
-        android:inputType="text"
-        android:cursorVisible="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/compName" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/compLength"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="60dp"
-        android:drawableRight="@drawable/ic_baseline_date_range_24"
-        android:drawableEnd="@drawable/ic_baseline_date_range_24"
-        android:ems="10"
-        android:hint="@string/length_weeks"
-        android:inputType="number"
-        android:maxLength="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/compStartDate" />
-
-    <Button
-        android:id="@+id/buttonCreateComp"
-        style="@style/Widget.AppCompat.Button.Colored"
+    <RadioGroup
+        android:id="@+id/notifyDaysOfWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="@string/create_competition"
-        android:textColor="@color/dull_yellow"
-        app:backgroundTint="@color/slate_blue"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/notifyTime"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/compLength" />
+        app:layout_constraintTop_toBottomOf="@+id/notifyToggle"
+        android:layout_marginStart="30dp">
+
+        <RadioButton
+            android:id="@+id/notifySun"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:onClick="onRadioButtonClicked"
+            android:padding="10dp"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:text="@string/sunday" />
+
+        <RadioButton
+            android:id="@+id/notifyMon"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:onClick="onRadioButtonClicked"
+            android:padding="10dp"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:text="@string/monday" />
+
+        <RadioButton
+            android:id="@+id/notifyTue"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:onClick="onRadioButtonClicked"
+            android:padding="10dp"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:text="@string/tuesday" />
+
+        <RadioButton
+            android:id="@+id/notifyWed"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:onClick="onRadioButtonClicked"
+            android:padding="10dp"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:text="@string/wednesday"
+
+        <RadioButton
+            android:id="@+id/notifyThu"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:onClick="onRadioButtonClicked"
+            android:padding="10dp"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:text="@string/thursday"
+
+        <RadioButton
+            android:id="@+id/notifyFri"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:onClick="onRadioButtonClicked"
+            android:padding="10dp"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:text="@string/friday"
+
+        <RadioButton
+            android:id="@+id/notifySat"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:onClick="onRadioButtonClicked"
+            android:padding="10dp"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:text="@string/saturday" />
+    </RadioGroup>
+
+    <TimePicker
+        android:id="@+id/notifyTime"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:timePickerMode="spinner"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/notifyDaysOfWeek"
+        app:layout_constraintTop_toBottomOf="@+id/notifyToggle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

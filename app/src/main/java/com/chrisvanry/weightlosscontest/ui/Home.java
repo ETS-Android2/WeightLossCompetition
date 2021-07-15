@@ -28,17 +28,24 @@ public class Home extends AppCompatActivity {
     // TODO hamburger menu
     // TODO settings button
 
-    private static final String TAG = "ViewDatabase";
+    private static final String TAG = "HomeActivity";
 
     private TextView textViewCurrentComp;
+    // private Button buttonSettings;
+    private Button buttonLogout;
+    private Button buttonCompDetails;
+    private Button buttonJoinComp;
+    private Button buttonCreateComp;
+    private Button buttonViewAll;
+
     private ProgressBar progressBar;
 
     // Firebase stuff
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private String userID;
 
-    private String compID;
+    private String userId;
+    private String compId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +54,13 @@ public class Home extends AppCompatActivity {
 
         // Nav buttons
         // Button buttonSettings = findViewById(R.id.buttonSettings);
-        Button buttonLogout = findViewById(R.id.buttonLogout);
+        buttonLogout = findViewById(R.id.buttonLogout);
 
         textViewCurrentComp = findViewById(R.id.textViewCurrentComp);
-        Button buttonCompDetails = findViewById(R.id.buttonCompDetails);
-        Button buttonJoinComp = findViewById(R.id.buttonJoinComp);
-        Button buttonCreateComp = findViewById(R.id.buttonCreateComp);
-        Button buttonViewAll = findViewById(R.id.buttonViewAll);
+        buttonCompDetails = findViewById(R.id.buttonCompDetails);
+        buttonJoinComp = findViewById(R.id.buttonJoinComp);
+        buttonCreateComp = findViewById(R.id.buttonCreateComp);
+        buttonViewAll = findViewById(R.id.buttonViewAll);
 
         // progress bar
         progressBar = findViewById(R.id.progress);
@@ -63,7 +70,7 @@ public class Home extends AppCompatActivity {
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = mFirebaseDatabase.getReference();
         FirebaseUser user = mAuth.getCurrentUser();
-        userID = user.getUid();
+        userId = user.getUid();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -87,17 +94,17 @@ public class Home extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User currentUser = getUserData(dataSnapshot);
-                compID = currentUser.getCompetitionId();
+                compId = currentUser.getCompetitionId();
                 String notEnrolled = "not enrolled";
                 // If user not enrolled, show text and hide details and record buttons
-                if (compID.equals(notEnrolled)){
+                if (compId.equals(notEnrolled)){
                     progressBar.setVisibility(View.GONE);
                     textViewCurrentComp.setText("- Not Enrolled -");
                     buttonJoinComp.setVisibility(View.VISIBLE);
                     buttonCreateComp.setVisibility(View.VISIBLE);
                     // If user enrolled, display comp name and hide create/join button
                 } else {
-                    Competition currentComp = getCompData(dataSnapshot, compID);
+                    Competition currentComp = getCompData(dataSnapshot);
                     progressBar.setVisibility(View.GONE);
                     textViewCurrentComp.setText(currentComp.getName());
                     buttonCompDetails.setVisibility(View.VISIBLE);
@@ -136,9 +143,9 @@ public class Home extends AppCompatActivity {
         // onClick listener for view details button
         buttonCompDetails.setOnClickListener(v -> {
             // direct to comp details activity and pass compID
-            Log.d(TAG, "onClick: compID: " + compID);
+            Log.d(TAG, "onClick: compID: " + compId);
             Intent intent = new Intent(getApplicationContext(), CompDetails.class);
-            intent.putExtra("comp_id", compID);
+            intent.putExtra("comp_id", compId);
             startActivity(intent);
         });
 
@@ -155,10 +162,10 @@ public class Home extends AppCompatActivity {
 
         User currentUser = new User();
 
-        currentUser.setFirstName(dataSnapshot.child("Users").child(userID).child("firstName").getValue().toString());
-        currentUser.setLastName(dataSnapshot.child("Users").child(userID).child("lastName").getValue().toString());
-        currentUser.setEmail(dataSnapshot.child("Users").child(userID).child("email").getValue().toString());
-        currentUser.setCompetitionId(dataSnapshot.child("Users").child(userID).child("competitionId").getValue().toString());
+        currentUser.setFirstName(dataSnapshot.child("Users").child(userId).child("firstName").getValue().toString());
+        currentUser.setLastName(dataSnapshot.child("Users").child(userId).child("lastName").getValue().toString());
+        currentUser.setEmail(dataSnapshot.child("Users").child(userId).child("email").getValue().toString());
+        currentUser.setCompetitionId(dataSnapshot.child("Users").child(userId).child("competitionId").getValue().toString());
 
         // display all the information
         Log.d(TAG, "showData: First name: " + currentUser.getFirstName());
@@ -169,18 +176,22 @@ public class Home extends AppCompatActivity {
         return currentUser;
     }
 
-    private Competition getCompData(DataSnapshot dataSnapshot, String compID) {
+    private Competition getCompData(DataSnapshot dataSnapshot) {
 
         Competition currentComp = new Competition();
 
-        currentComp.setName(dataSnapshot.child("Competitions").child(compID).child("name").getValue().toString());
-        currentComp.setStartDate(dataSnapshot.child("Competitions").child(compID).child("startDate").getValue().toString());
-        currentComp.setLength(dataSnapshot.child("Competitions").child(compID).child("length").getValue().toString());
+        currentComp.setName(dataSnapshot.child("Competitions").child(compId).child("name").getValue().toString());
+        currentComp.setStartDate(dataSnapshot.child("Competitions").child(compId).child("startDate").getValue().toString());
+        currentComp.setLength(dataSnapshot.child("Competitions").child(compId).child("length").getValue().toString());
+        currentComp.setOwnerId(dataSnapshot.child("Competitions").child(compId).child("ownerId").getValue().toString());
+        currentComp.setCompetitionId(dataSnapshot.child("Competitions").child(compId).child("competitionId").getValue().toString());
 
         // display all the information
         Log.d(TAG, "showData: Comp name: " + currentComp.getName());
         Log.d(TAG, "showData: Start date: " + currentComp.getStartDate());
         Log.d(TAG, "showData: Length: " + currentComp.getLength());
+        Log.d(TAG, "showData: Owner ID: " + currentComp.getOwnerId());
+        Log.d(TAG, "showData: Comp ID: " + currentComp.getCompetitionId());
 
         return currentComp;
     }

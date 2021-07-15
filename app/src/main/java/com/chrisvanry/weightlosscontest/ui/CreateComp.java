@@ -2,41 +2,28 @@ package com.chrisvanry.weightlosscontest.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.chrisvanry.weightlosscontest.R;
 import com.chrisvanry.weightlosscontest.data.Competition;
-import com.chrisvanry.weightlosscontest.data.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -120,7 +107,7 @@ public class CreateComp extends AppCompatActivity implements DatePickerDialog.On
     }
 
     public void openMessage() {
-        CreateCompMessage dialog = new CreateCompMessage();
+        CreateCompDialog dialog = new CreateCompDialog();
         dialog.show(getSupportFragmentManager(), "create comp message");
     }
 
@@ -198,12 +185,16 @@ public class CreateComp extends AppCompatActivity implements DatePickerDialog.On
         // Write object values to Firebase
         myRef.child("Competitions").child(key).setValue(competition);
 
-        // Create 0 value entries for each week in Firebase
-        int compLengthInt = Integer.parseInt(compLength);
-        for (int i = 1; i <= compLengthInt; i++) {
-            String weekNum = String.valueOf(i);
-            myRef.child("Entries").child(key).child(userID).child(weekNum).setValue("0");
-        }
+//        // Create 0 value entries for each week in Firebase
+//        int compLengthInt = Integer.parseInt(compLength);
+//        for (int i = 1; i <= compLengthInt; i++) {
+//            String weekNum = String.valueOf(i);
+//            myRef.child("Entries").child(key).child(userID).child(weekNum).setValue("0");
+//        }
+
+        // Create first weight entry with 0 value
+        String week1 = "1";
+        myRef.child("Entries").child(key).child(userID).child(week1).setValue("0");
 
         // Update user competitionID in Firebase
         myRef.child("Users").child(userID).child("competitionId").setValue(key).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -19,10 +19,6 @@ import com.chrisvanry.weightlosscontest.data.Competition;
 import com.chrisvanry.weightlosscontest.data.User;
 import com.chrisvanry.weightlosscontest.data.WeightEntry;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,10 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class CompDetails extends AppCompatActivity {
 
@@ -101,11 +94,12 @@ public class CompDetails extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get current user and comp ID and name
                 User currentUser = getUserData(dataSnapshot);
-                Competition currentComp = getCompData(dataSnapshot, compDetailsId);
+                Competition currentComp = getCompData(dataSnapshot);
                 currentCompName = currentComp.getName();
                 currentCompLength = currentComp.getLength();
 
                 // get chart data
+                //
 
                 // Display comp name
                 progressBar.setVisibility(View.GONE);
@@ -143,7 +137,7 @@ public class CompDetails extends AppCompatActivity {
 
         // OnClick listener for home button
         buttonHome.setOnClickListener(v -> {
-            // direct to home screen
+            // direct to home activity
             Intent newIntent = new Intent(getApplicationContext(), Home.class);
             startActivity(newIntent);
             finish();
@@ -158,6 +152,13 @@ public class CompDetails extends AppCompatActivity {
             finish();
         });
 
+        // OnClick listener for record weight button
+        buttonRecordWeight.setOnClickListener(v -> {
+            // direct to record weight activity
+            Intent newIntent = new Intent(getApplicationContext(), RecordWeight.class);
+            startActivity(newIntent);
+        });
+
         // OnClick listener for join comp button
         buttonJoinComp.setOnClickListener(v -> {
             DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -165,11 +166,11 @@ public class CompDetails extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     switch (which){
                         case DialogInterface.BUTTON_POSITIVE:
-                            //Yes button clicked
-                            joinCurrentComp(userID, compDetailsId, currentCompLength);
+                            // Join button clicked
+                            joinCurrentComp(userId, compDetailsId);
                             break;
                         case DialogInterface.BUTTON_NEGATIVE:
-                            //No button clicked
+                            // Cancel button clicked
                             break;
                     }
                 }
@@ -201,15 +202,15 @@ public class CompDetails extends AppCompatActivity {
         return currentUser;
     }
 
-    private Competition getCompData(DataSnapshot dataSnapshot, String compID) {
+    private Competition getCompData(DataSnapshot dataSnapshot) {
 
         Competition currentComp = new Competition();
 
-        currentComp.setOwnerId(dataSnapshot.child("Competitions").child(compID).child("ownerId").getValue().toString());
-        currentComp.setName(dataSnapshot.child("Competitions").child(compID).child("name").getValue().toString());
-        currentComp.setStartDate(dataSnapshot.child("Competitions").child(compID).child("startDate").getValue().toString());
-        currentComp.setLength(dataSnapshot.child("Competitions").child(compID).child("length").getValue().toString());
-        currentComp.setCompetitionId(dataSnapshot.child("Competitions").child(compID).child("competitionId").getValue().toString());
+        currentComp.setOwnerId(dataSnapshot.child("Competitions").child(compDetailsId).child("ownerId").getValue().toString());
+        currentComp.setName(dataSnapshot.child("Competitions").child(compDetailsId).child("name").getValue().toString());
+        currentComp.setStartDate(dataSnapshot.child("Competitions").child(compDetailsId).child("startDate").getValue().toString());
+        currentComp.setLength(dataSnapshot.child("Competitions").child(compDetailsId).child("length").getValue().toString());
+        currentComp.setCompetitionId(dataSnapshot.child("Competitions").child(compDetailsId).child("competitionId").getValue().toString());
 
         // display all the information
         Log.d(TAG, "showData Comp: Owner ID: " + currentComp.getOwnerId());
@@ -221,14 +222,19 @@ public class CompDetails extends AppCompatActivity {
         return currentComp;
     }
 
-    private void joinCurrentComp(String userID, String compDetailsId, String currentCompLength) {
+    private void joinCurrentComp(String userID, String compDetailsId) {
 
-        // Create 0 value entries for each week in Firebase
-        int compLengthInt = Integer.parseInt(currentCompLength);
-        for (int i = 1; i <= compLengthInt; i++) {
-            String weekNum = String.valueOf(i);
-            myRef.child("Entries").child(compDetailsId).child(userID).child(weekNum).setValue("0");
-        }
+//        // Create 0 value entries for each week in Firebase
+//        int compLengthInt = Integer.parseInt(currentCompLength);
+//        for (int i = 1; i <= compLengthInt; i++) {
+//            String weekNum = String.valueOf(i);
+//            myRef.child("Entries").child(compDetailsId).child(userID).child(weekNum).setValue("0");
+//        }
+
+        // Create first weight entry with 0 value
+        String week1 = "1";
+        myRef.child("Entries").child(compDetailsId).child(userID).child(week1).setValue("0");
+
         // write compID to user branch
         myRef.child("Users").child(userID).child("competitionId").setValue(compDetailsId).addOnCompleteListener(new OnCompleteListener<Void>() {
 
@@ -251,53 +257,60 @@ public class CompDetails extends AppCompatActivity {
 
     }
 
-    private ArrayList<Entry> dataValues1() {
+//    private ArrayList<Entry> dataValues1() {
+//
+//        ArrayList<Entry> dataVals = new ArrayList<>();
+//        dataVals.add(new Entry(0,20));
+//        dataVals.add(new Entry(1,24));
+//        dataVals.add(new Entry(2,2));
+//        dataVals.add(new Entry(3,10));
+//        return dataVals;
+//    }
+//
+//    private ArrayList<Entry> dataValues2() {
+//        ArrayList<Entry> dataVals = new ArrayList<>();
+//        dataVals.add(new Entry(0,12));
+//        dataVals.add(new Entry(2,16));
+//        dataVals.add(new Entry(3,23));
+//        dataVals.add(new Entry(5,1));
+//        dataVals.add(new Entry(7,18));
+//        return dataVals;
+//    }
 
-        ArrayList<Entry> dataVals = new ArrayList<>();
-        dataVals.add(new Entry(0,20));
-        dataVals.add(new Entry(1,24));
-        dataVals.add(new Entry(2,2));
-        dataVals.add(new Entry(3,10));
-        return dataVals;
-    }
+//    private ArrayList<WeightEntry> setChartDataValues(DataSnapshot dataSnapshot, String compDetailsId, String memberUserId, String currentCompLength) {
+//
+//
+//        // retrieve entry key/value pairs
+//        int compLengthInt = Integer.parseInt(currentCompLength);
+//        for (int i = 1; i <= compLengthInt; i++) {
+//            String weekNum = String.valueOf(i);
+//            myRef.child("Entries").child(compDetailsId).child(userID).child(weekNum).setValue("0");
+//        }
+//
+//        ArrayList<Entry> dataVals = new ArrayList<>();
+//
+//        return dataVals;
+//    }
 
-    private ArrayList<Entry> dataValues2() {
-        ArrayList<Entry> dataVals = new ArrayList<>();
-        dataVals.add(new Entry(0,12));
-        dataVals.add(new Entry(2,16));
-        dataVals.add(new Entry(3,23));
-        dataVals.add(new Entry(5,1));
-        dataVals.add(new Entry(7,18));
-        return dataVals;
-    }
-
-    private ArrayList<WeightEntry> setChartDataValues(DataSnapshot dataSnapshot, String compDetailsId, String memberUserId, String currentCompLength) {
-
-
-        // retrieve entry key/value pairs
-        int compLengthInt = Integer.parseInt(currentCompLength);
-        for (int i = 1; i <= compLengthInt; i++) {
-            String weekNum = String.valueOf(i);
-            myRef.child("Entries").child(compDetailsId).child(userID).child(weekNum).setValue("0");
-        }
-
-        ArrayList<Entry> dataVals = new ArrayList<>();
-
-        return dataVals;
-    }
-
+    // Retrieve all weight entries for competition for a single member
     private ArrayList<WeightEntry> getWeightEntries(DataSnapshot dataSnapshot, String compDetailsId, String memberUserId) {
 
         // Arraylist to store object(s)
         ArrayList<WeightEntry> weightEntries = new ArrayList<>();
+        // object to store key value pair
+        WeightEntry weightEntry = new WeightEntry();
 
         for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-            Competition competition = snapshot.getValue(Competition.class);
-
-
-
-
-        return weightEntries
+            // key = week number, value = weight entry
+            String key = snapshot.child("Entries").child(compDetailsId).child(memberUserId).getKey();
+            String value = snapshot.child("Entries").child(compDetailsId).child(memberUserId).getValue().toString();
+            // write to object
+            weightEntry.setWeekNum(key);
+            weightEntry.setWeightData(value);
+            // write object to arraylist
+            weightEntries.add(weightEntry);
+        }
+        return weightEntries;
     }
 
     private void toastMessage(String message){

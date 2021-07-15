@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-public class CreateCompMessage extends AppCompatDialogFragment {
+public class CreateCompDialog extends AppCompatDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
