@@ -129,27 +129,27 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:text="@string/record_weight"
         android:textColor="@color/dull_yellow"
         android:visibility="gone"
         app:backgroundTint="@color/slate_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lineChart" />
 
     <Button
         android:id="@+id/buttonJoinComp"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
         android:text="@string/join_competition"
         android:textColor="@color/dull_yellow"
         android:visibility="gone"
         app:backgroundTint="@color/slate_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lineChart" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
