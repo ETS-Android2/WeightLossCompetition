@@ -4,18 +4,20 @@ package com.chrisvanry.weightlosscontest.data;
 
 public class Competition {
 
-    public String ownerId, name, startDate, length, competitionId;
+    public String ownerId, name, startDate, length, memberCount, competitionId;
 
     public Competition() {
 
     }
 
     // constructor
-    public Competition(String ownerId, String name, String startDate, String length, String competitionId) {
+    public Competition(String ownerId, String name, String startDate, String length,
+                       String memberCount, String competitionId) {
         this.ownerId = ownerId;
         this.name = name;
         this.startDate = startDate;
         this.length = length;
+        this.memberCount = memberCount;
         this.competitionId = competitionId;
     }
 
@@ -52,6 +54,14 @@ public class Competition {
         this.length = length;
     }
 
+    public String getMemberCount() {
+        return memberCount;
+    }
+
+    public void setMemberCount(String memberCount) {
+        this.memberCount = memberCount;
+    }
+
     public String getCompetitionId() {
         return competitionId;
     }
@@ -67,6 +77,7 @@ public class Competition {
                 ", name='" + name + '\'' +
                 ", startDate='" + startDate + '\'' +
                 ", length='" + length + '\'' +
+                ", memberCount='" + memberCount + '\'' +
                 ", competitionId='" + competitionId + '\'' +
                 '}';
     }

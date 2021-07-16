@@ -146,6 +146,7 @@ public class CreateComp extends AppCompatActivity implements DatePickerDialog.On
         String compName = textInputEditTextCompName.getText().toString().trim();
         String compStartDate = textInputEditTextCompStartDate.getText().toString().trim();
         String compLength = textInputEditTextCompLength.getText().toString().trim();
+        String memberCount = "1";
         String competitionId = key;
 
         // input validation - field not empty
@@ -180,17 +181,10 @@ public class CreateComp extends AppCompatActivity implements DatePickerDialog.On
         }
 
         // Create user object with user input
-        Competition competition = new Competition(ownerId, compName, compStartDate, compLength, competitionId);
+        Competition competition = new Competition(ownerId, compName, compStartDate, compLength, memberCount, competitionId);
 
         // Write object values to Firebase
         myRef.child("Competitions").child(key).setValue(competition);
-
-//        // Create 0 value entries for each week in Firebase
-//        int compLengthInt = Integer.parseInt(compLength);
-//        for (int i = 1; i <= compLengthInt; i++) {
-//            String weekNum = String.valueOf(i);
-//            myRef.child("Entries").child(key).child(userID).child(weekNum).setValue("0");
-//        }
 
         // Create first weight entry with 0 value
         String week1 = "1";

@@ -119,7 +119,6 @@
             android:id="@+id/notifySun"
             android:layout_width="130dp"
             android:layout_height="40dp"
-            android:onClick="onRadioButtonClicked"
             android:padding="10dp"
             android:scaleX="0.8"
             android:scaleY="0.8"
@@ -129,7 +128,6 @@
             android:id="@+id/notifyMon"
             android:layout_width="130dp"
             android:layout_height="40dp"
-            android:onClick="onRadioButtonClicked"
             android:padding="10dp"
             android:scaleX="0.8"
             android:scaleY="0.8"
@@ -139,7 +137,6 @@
             android:id="@+id/notifyTue"
             android:layout_width="130dp"
             android:layout_height="40dp"
-            android:onClick="onRadioButtonClicked"
             android:padding="10dp"
             android:scaleX="0.8"
             android:scaleY="0.8"
@@ -149,37 +146,33 @@
             android:id="@+id/notifyWed"
             android:layout_width="130dp"
             android:layout_height="40dp"
-            android:onClick="onRadioButtonClicked"
             android:padding="10dp"
             android:scaleX="0.8"
             android:scaleY="0.8"
-            android:text="@string/wednesday"
+            android:text="@string/wednesday" />
 
         <RadioButton
             android:id="@+id/notifyThu"
             android:layout_width="130dp"
             android:layout_height="40dp"
-            android:onClick="onRadioButtonClicked"
             android:padding="10dp"
             android:scaleX="0.8"
             android:scaleY="0.8"
-            android:text="@string/thursday"
+            android:text="@string/thursday" />
 
         <RadioButton
             android:id="@+id/notifyFri"
             android:layout_width="130dp"
             android:layout_height="40dp"
-            android:onClick="onRadioButtonClicked"
             android:padding="10dp"
             android:scaleX="0.8"
             android:scaleY="0.8"
-            android:text="@string/friday"
+            android:text="@string/friday" />
 
         <RadioButton
             android:id="@+id/notifySat"
             android:layout_width="130dp"
             android:layout_height="40dp"
-            android:onClick="onRadioButtonClicked"
             android:padding="10dp"
             android:scaleX="0.8"
             android:scaleY="0.8"
