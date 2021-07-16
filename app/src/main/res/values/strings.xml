@@ -38,4 +38,7 @@
     <string name="thursday">Thursday</string>
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
+    <string name="leave_competition">Leave Competition</string>
+    <string name="settings_menu_text">Weekly weigh-in reminders are enabled by default. To disable notifications, access your Android settings menu.</string>
+    <string name="settings_menu_text_2">Note: When you leave a competition, your weight entries will be retained with that competition.</string>
 </resources>

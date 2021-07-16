@@ -31,7 +31,7 @@ public class Home extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
 
     private TextView textViewCurrentComp;
-    // private Button buttonSettings;
+    private Button buttonSettings;
     private Button buttonLogout;
     private Button buttonCompDetails;
     private Button buttonJoinComp;
@@ -53,7 +53,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         // Nav buttons
-        // Button buttonSettings = findViewById(R.id.buttonSettings);
+        Button buttonSettings = findViewById(R.id.buttonSettings);
         buttonLogout = findViewById(R.id.buttonLogout);
 
         textViewCurrentComp = findViewById(R.id.textViewCurrentComp);
@@ -114,6 +114,13 @@ public class Home extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
+        });
+
+        // OnClick listener for settings button
+        buttonSettings.setOnClickListener(v -> {
+            // direct to comp list activity
+            Intent intent = new Intent(getApplicationContext(), Settings.class);
+            startActivity(intent);
         });
 
         // OnClick listener for logout button

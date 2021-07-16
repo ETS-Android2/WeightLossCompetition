@@ -44,7 +44,7 @@ public class CompList extends AppCompatActivity {
 
         // Nav buttons
         Button buttonHome = findViewById(R.id.buttonHome);
-        // Button buttonSettings = findViewById(R.id.buttonSettings);
+        Button buttonSettings = findViewById(R.id.buttonSettings);
         Button buttonLogout = findViewById(R.id.buttonLogout);
 
         // RecyclerView
@@ -71,6 +71,13 @@ public class CompList extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), Home.class);
             startActivity(intent);
             finish();
+        });
+
+        // OnClick listener for settings button
+        buttonSettings.setOnClickListener(v -> {
+            // direct to comp list activity
+            Intent intent = new Intent(getApplicationContext(), Settings.class);
+            startActivity(intent);
         });
 
         // OnClick listener for logout button

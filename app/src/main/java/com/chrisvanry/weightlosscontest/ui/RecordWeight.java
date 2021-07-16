@@ -39,7 +39,7 @@ public class RecordWeight extends AppCompatActivity {
     private static final String TAG = "RecordWeight";
 
     private Button buttonHome;
-    // private Button buttonSettings;
+    private Button buttonSettings;
     private Button buttonLogout;
     private Button buttonRecordWeight;
 
@@ -72,7 +72,7 @@ public class RecordWeight extends AppCompatActivity {
 
         // Nav buttons
         buttonHome = findViewById(R.id.buttonHome);
-        // Button buttonSettings = findViewById(R.id.buttonSettings);
+        buttonSettings = findViewById(R.id.buttonSettings);
         buttonLogout = findViewById(R.id.buttonLogout);
 
         spinner = findViewById(R.id.weekSpinner);
@@ -112,6 +112,13 @@ public class RecordWeight extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), Home.class);
             startActivity(intent);
             finish();
+        });
+
+        // OnClick listener for settings button
+        buttonSettings.setOnClickListener(v -> {
+            // direct to comp list activity
+            Intent intent = new Intent(getApplicationContext(), Settings.class);
+            startActivity(intent);
         });
 
         // OnClick listener for logout button

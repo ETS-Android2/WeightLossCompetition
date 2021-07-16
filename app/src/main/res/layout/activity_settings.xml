@@ -91,105 +91,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dividerOneText" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="40dp"
-        android:text="@string/enable_weekly_weigh_in_reminders"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dividerOneBottom"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-    <RadioGroup
-        android:id="@+id/rdGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/settingsText"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/timePicker1"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch1"
-        android:layout_marginStart="30dp">
-
-        <RadioButton
-            android:id="@+id/notifySun"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            android:padding="10dp"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            android:text="@string/sunday" />
-
-        <RadioButton
-            android:id="@+id/notifyMon"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            android:padding="10dp"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            android:text="@string/monday" />
-
-        <RadioButton
-            android:id="@+id/notifyTue"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            android:padding="10dp"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            android:text="@string/tuesday" />
-
-        <RadioButton
-            android:id="@+id/notifyWed"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            android:padding="10dp"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            android:text="@string/wednesday" />
-
-        <RadioButton
-            android:id="@+id/notifyThu"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            android:padding="10dp"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            android:text="@string/thursday" />
-
-        <RadioButton
-            android:id="@+id/notifyFri"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            android:padding="10dp"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            android:text="@string/friday" />
-
-        <RadioButton
-            android:id="@+id/notifySat"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            android:padding="10dp"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            android:text="@string/saturday" />
-    </RadioGroup>
-
-    <TimePicker
-        android:id="@+id/timePicker1"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
-        android:timePickerMode="spinner"
+        android:gravity="center_horizontal"
+        android:singleLine="false"
+        android:text="@string/settings_menu_text"
+        android:textSize="18dp"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/rdGroup"
-        app:layout_constraintTop_toBottomOf="@+id/switch1" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerOneBottom" />
+
+    <TextView
+        android:id="@+id/settingsText2"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:singleLine="false"
+        android:text="@string/settings_menu_text_2"
+        android:textSize="18dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsText" />
+
+    <Button
+        android:id="@+id/buttonLeaveComp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/leave_competition"
+        android:textColor="@color/dull_yellow"
+        app:backgroundTint="@color/slate_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsText2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

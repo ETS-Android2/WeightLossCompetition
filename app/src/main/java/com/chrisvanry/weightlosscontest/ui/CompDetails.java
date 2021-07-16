@@ -6,8 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.shapes.Shape;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,17 +19,16 @@ import android.widget.Toast;
 import com.chrisvanry.weightlosscontest.R;
 import com.chrisvanry.weightlosscontest.data.Competition;
 import com.chrisvanry.weightlosscontest.data.User;
-import com.chrisvanry.weightlosscontest.data.WeightEntry;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,9 +38,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.collection.LLRBNode;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 // TODO max member count - disable join button
 
@@ -49,12 +50,12 @@ public class CompDetails extends AppCompatActivity {
     private static final String TAG = "CompDetailsActivity";
 
     private User currentUser;
+    private String currentUserId;
     private Competition currentComp;
     private String compDetailsId;
     private String currentCompName;
     private String currentCompLength;
     private String currentCompMemberCount;
-    private String labelFullName;
     private TextView textViewCurrentComp;
     private ProgressBar progressBar;
     private Button buttonJoinComp;
@@ -62,15 +63,11 @@ public class CompDetails extends AppCompatActivity {
 
     // Firebase stuff
     private FirebaseAuth mAuth;
-    private String userId;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;;
 
     // MP Android Chart
     private LineChart lineChart;
-    LineDataSet lineDataSet = new LineDataSet(null, null);
-    ArrayList<ILineDataSet> ILineDataSet = new ArrayList<>();
-    LineData lineData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +81,7 @@ public class CompDetails extends AppCompatActivity {
 
         // Nav buttons
         Button buttonHome = findViewById(R.id.buttonHome);
-        // Button buttonSettings = findViewById(R.id.buttonSettings);
+        Button buttonSettings = findViewById(R.id.buttonSettings);
         Button buttonLogout = findViewById(R.id.buttonLogout);
 
         textViewCurrentComp = findViewById(R.id.textViewCurrentComp);
@@ -98,12 +95,9 @@ public class CompDetails extends AppCompatActivity {
         // Firebase stuff
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        userId = user.getUid();
+        currentUserId = user.getUid();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
-
-        // MP Android Chart
-
 
         // show progress bar while loading
         progressBar.setVisibility(View.VISIBLE);
@@ -124,21 +118,49 @@ public class CompDetails extends AppCompatActivity {
                 Log.d(TAG, "currentCompMemberCount: " + currentCompMemberCount);
 
                 // array list of comp member userIDs
-                ArrayList<String> compMembers = getCompMembers(dataSnapshot);
-                // chart entries for single user TODO iterate through all comp members
-                ArrayList<Entry> compMemberDataVals = getCompEntries(dataSnapshot, userId);
+                ArrayList<String> compMemberIds = getCompMembers(dataSnapshot);
+
+                // array list of entries and names
+                ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
+
+                // iterate userIDs and retrieve name and entry data, write to line date set
+                int i = 0;
+                int colorArray[] = {Color.BLUE, Color.RED, Color.GREEN, Color.CYAN, Color.DKGRAY, Color.MAGENTA, Color.YELLOW};
+                for (String compMemberId : compMemberIds) {
+
+                    // comp member full name
+                    User compMember = getUserData(dataSnapshot, compMemberId);
+                    String compMemberName = compMember.getFirstName() + " " + compMember.getLastName();
+
+                    // get member entries
+                    ArrayList<Entry> compMemberEntries = getCompEntries(dataSnapshot, compMemberId);
+
+                    // write to line data set
+                    LineDataSet lineDataSet = new LineDataSet(compMemberEntries, compMemberName);
+
+                    // set color for each
+                    lineDataSet.setCircleColors(colorArray[i]);
+                    lineDataSet.setColor(colorArray[i]);
+                    i++;
+
+                    lineDataSet.setLineWidth(2);
+                    lineDataSet.setValueTextSize(10);
+
+                    // write sets to array
+                    lineDataSets.add(lineDataSet);
+
+                }
 
                 // Display comp name
                 progressBar.setVisibility(View.GONE);
                 textViewCurrentComp.setText(currentCompName);
 
-                // display chart TODO respective full name
-                labelFullName = currentUser.getFirstName() + " " + currentUser.getLastName();
-                showChart(compMemberDataVals, labelFullName);
+                // display chart
+                showChart(lineDataSets);
 
+                // Show or hide record weight button
                 String userCompId = currentUser.getCompetitionId();
                 String notEnrolled = "not enrolled";
-
                 // User comp enrollment status
                 if (userCompId.equals(notEnrolled)){
                     // If user not enrolled, show join button
@@ -160,6 +182,13 @@ public class CompDetails extends AppCompatActivity {
             Intent newIntent = new Intent(getApplicationContext(), Home.class);
             startActivity(newIntent);
             finish();
+        });
+
+        // OnClick listener for settings button
+        buttonSettings.setOnClickListener(v -> {
+            // direct to comp list activity
+            Intent newIntent = new Intent(getApplicationContext(), Settings.class);
+            startActivity(newIntent);
         });
 
         // OnClick listener for logout button
@@ -186,7 +215,7 @@ public class CompDetails extends AppCompatActivity {
                     switch (which){
                         case DialogInterface.BUTTON_POSITIVE:
                             // Join button clicked
-                            joinCurrentComp(userId, compDetailsId, currentCompMemberCount);
+                            joinCurrentComp(currentUserId, compDetailsId, currentCompMemberCount);
                             break;
                         case DialogInterface.BUTTON_NEGATIVE:
                             // Cancel button clicked
@@ -203,7 +232,27 @@ public class CompDetails extends AppCompatActivity {
 
     }
 
+    // get user data for current user
     private User getUserData(DataSnapshot dataSnapshot) {
+
+        User currentUser = new User();
+
+        currentUser.setFirstName(dataSnapshot.child("Users").child(currentUserId).child("firstName").getValue().toString());
+        currentUser.setLastName(dataSnapshot.child("Users").child(currentUserId).child("lastName").getValue().toString());
+        currentUser.setEmail(dataSnapshot.child("Users").child(currentUserId).child("email").getValue().toString());
+        currentUser.setCompetitionId(dataSnapshot.child("Users").child(currentUserId).child("competitionId").getValue().toString());
+
+        // display all the information
+        Log.d(TAG, "showData User: First name: " + currentUser.getFirstName());
+        Log.d(TAG, "showData User: Last name: " + currentUser.getLastName());
+        Log.d(TAG, "showData User: Email: " + currentUser.getEmail());
+        Log.d(TAG, "showData User: Comp ID: " + currentUser.getCompetitionId());
+
+        return currentUser;
+    }
+
+    // overloaded user object function - to get user data for each comp member
+    private User getUserData(DataSnapshot dataSnapshot, String userId) {
 
         User currentUser = new User();
 
@@ -325,24 +374,41 @@ public class CompDetails extends AppCompatActivity {
         return compEntries;
     }
 
-    private void showChart(ArrayList<Entry> memberDataVals, String labelFullName) {
+    private void showChart(ArrayList<ILineDataSet> lineDataSets) {
 
-        lineDataSet.setValues(memberDataVals);
-        lineDataSet.setLabel(labelFullName);
+        int compLength = Integer.parseInt(currentCompLength);
 
-        ILineDataSet.clear();
-        ILineDataSet.add(lineDataSet);
-
-        lineData = new LineData(ILineDataSet);
-        lineChart.clear();
+        LineData lineData = new LineData(lineDataSets);
         lineChart.setData(lineData);
-        lineChart.getDescription().setText("Weight (lbs)");
+
+        // format description
+        Description description = new Description();
+        description.setText("Weight (lbs)");
+        description.setTextColor(Color.BLACK);
+        description.setTextSize(12);
+        lineChart.setDescription(description);
+
+        lineChart.setDrawGridBackground(false);
+        lineChart.setDrawBorders(true);
+        lineChart.setBorderWidth(2);
+
+        // legend
+        Legend legend = lineChart.getLegend();
+        legend.setDrawInside(false);
+        legend.setForm(Legend.LegendForm.CIRCLE);
+        legend.setTextSize(12f);
+        legend.setFormSize(10f);
+        legend.setXEntrySpace(15f);
+        legend.setFormToTextSpace(8f);
 
         XAxis xAxis = lineChart.getXAxis();
         YAxis yAxisLeft = lineChart.getAxisLeft();
         YAxis yAxisRight = lineChart.getAxisRight();
 
-        xAxis.setLabelCount(Integer.parseInt(currentCompLength), true);
+        xAxis.setAxisMaximum(compLength);
+        xAxis.setAxisMinimum(1);
+        xAxis.setLabelCount(compLength, true);
+        yAxisLeft.setDrawLabels(false);
 
         lineChart.invalidate();
     }
