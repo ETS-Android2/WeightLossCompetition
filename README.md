@@ -1,6 +1,8 @@
 # WeightLossContest
 BYU-I Senior Project
 
-Android Application created using Android Studio and written in Java. Link to Java files: https://github.com/chrisvanry/WeightLossContest/tree/master/app/src/main/java/com/chrisvanry/weightlosscontest
+Track weight loss with groups of friends.
 
-Authentication and Realtime Database using Firebase. Chart view using MPAndroidChart.
+16 July 2021 - Version 1.0 published.
+
+Android Application created using Android Studio and written in Java. Authentication and Realtime Database using Firebase. Chart view using MPAndroidChart.
