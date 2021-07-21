@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.chrisvanry.weightlosscontest">
+    package="com.chrisvanry.weightlosscompetition">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,57 +11,64 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WeightLossContest">
+        android:theme="@style/Theme.WeightLossCompetition">
+
         <activity
-            android:name=".ui.Splash"
-            android:theme="@style/SplashTheme"
+            android:name="com.chrisvanry.weightlosscompetition.ui.Splash"
             android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.Login"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:name="com.chrisvanry.weightlosscompetition.activities.Login"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.SignUp"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:name="com.chrisvanry.weightlosscompetition.activities.Register"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name="com.chrisvanry.weightlosscompetition.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            tools:ignore="LockedOrientationActivity" >
+        </activity>
         <activity
-            android:name=".ui.Home"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:name="com.chrisvanry.weightlosscompetition.ui.Home"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.CreateComp"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:name="com.chrisvanry.weightlosscompetition.ui.CreateComp"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.CompList"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:name="com.chrisvanry.weightlosscompetition.ui.CompList"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.CompDetails"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:name="com.chrisvanry.weightlosscompetition.ui.CompDetails"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.RecordWeight"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:name="com.chrisvanry.weightlosscompetition.ui.RecordWeight"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.Settings"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:name="com.chrisvanry.weightlosscompetition.ui.Settings"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
     </application>
 
 </manifest>

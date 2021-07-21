@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Weight Loss Contest</string>
+    <string name="app_name">Weight Loss Competition</string>
     <string name="password">password</string>
     <string name="log_in">Log in</string>
     <string name="email_address">email address</string>
@@ -41,4 +41,6 @@
     <string name="leave_competition">Leave Competition</string>
     <string name="settings_menu_text">Weekly weigh-in reminders are enabled by default. To disable notifications, access your Android settings menu.</string>
     <string name="settings_menu_text_2">Note: When you leave a competition, your weight entries will be retained with that competition.</string>
+    <string name="my_stats">My Stats</string>
+    <string name="competition">Competition</string>
 </resources>
