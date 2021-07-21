@@ -1,4 +1,4 @@
-# WeightLossContest
+# WeightLossCompetition
 BYU-I Senior Project
 
 Track weight loss with groups of friends.
